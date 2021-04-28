@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
+	<title>이상형월드컵시작페이지</title>
+	<style>
+		*{
+			padding: 0;
+			margin:0;
+			overflow: none;
+
+		}
+		html, body{
+			overflow: none;
+			display: flex;
+			height: 100%;
+			width: 100%;
+		}
+		#logo{
+			margin: 3rem;
+		}
+		#left{
+			height: 100%;
+			width: 30rem;
+			margin: 0;
+			background-color: rgb(247, 245, 245);
+		}
+		#text{
+			width: 30rem;
+			margin: 7rem 0 0 4rem;
+			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		#rightimg{
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			box-shadow: 15px 15px 150px 5px #000000 inset ;
+		}
+		#start{
+			border-radius: 12px;
+			color: white;
+			background-color: rgb(209, 54, 57);
+			padding: .8rem .9rem 1rem .9rem;
+			width: 2rem;
+			height: 2rem;
+			margin: 5rem 12rem;
+			border: 2px solid rgb(209, 54, 57);
+			cursor: pointer;
+		}
+		#start:hover{
+			background-color: rgb(182, 47, 49);
+			border: 2px solid rgb(182, 47, 49);
+			transition: all ease .2s 0s;
+		}
+		input{
+			position: relative;
+			top: 1rem;
+			width: 13rem;
+			height: 2.2rem;
+			border-radius: 6px;
+			background-color: rgba(242,242,242);
+			font-family: 'Nanum Gothic', sans-serif;
+			padding: 3px 10px;
+			border:none;
+		}
+		input:hover{
+			background-color: rgb(226, 226, 226);
+		}
+		#setting{
+			color: white;
+			position: fixed;
+			top: 41rem;
+			right: 3rem;
+			width: 2.6rem;
+			height: 2.6rem;
+			background-color: rgba(242,242,242,.6);
+			padding-top: .5rem;
+			padding-left: .6rem;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+		#setting:hover{
+			background-color: rgba(242,242,242,.8);
+			transition: all ease .2s 0s;
+		}
+	</style>
+</head>
+
+<body>
+	<div id=left>
+		<img src="./lol.png" alt="" width="60px" id="logo">
+		<div id="text">
+			<h1><strong>이상형 월드컵<br></strong></h1>
+			<h3>: LOL 챔피언 능력 중 가지고 싶은 능력 월드컵<br><br></h3>
+		</div>
+		<a href="이상형 월드컵 그래프 추가.html"><i class="xi-arrow-right xi-2x" id="start"></i></a>
+	</div>
+	<div id=right>
+		<img src="./runeterra-ionia-01.jpg" alt="" id="rightimg">
+		<i class="xi-cog xi-2x" id="setting" onclick="setting()"></i>
+	</div>
+	<script>
+		function setting(){
+			alert("문헌정보학과 2019115100 천가영");
+		}
+	</script>
+</body>
+
+</html>

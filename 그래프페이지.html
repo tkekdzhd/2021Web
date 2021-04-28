@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
+	<title>이상형월드컵</title>
+	<style>
+		body {
+			background-color: rgb(15, 27, 38);
+		}
+
+		#header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 7rem;
+			border-top: 5px solid rgb(205, 190, 145);
+			border-bottom: .5px solid rgb(59, 59, 59);
+		}
+
+		#h3 {
+			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Noto Sans KR', sans-serif;
+			color: rgb(205, 190, 145);
+			padding-bottom: 1rem;
+		}
+		#restart{
+			position: fixed;
+			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Noto Sans KR', sans-serif;
+			top: 38rem;
+			right: 2rem;
+			border-radius: 50%;
+			width: 4.3rem;
+			height: 4rem;
+			background-color: rgb(44, 163, 187);
+			text-decoration: none;
+			color: white;
+			font-size: 14px;
+			padding-left:1rem;
+			padding-top: 1rem;
+		}
+		#restart:hover{
+			background-color: rgb(37, 129, 148);
+		}
+		#restarticon{
+			padding-left: 1.1rem;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<div id="header">
+			<img src="./그림1.png" alt="" style="width:4rem">
+			<h3 id="h3" style="font-size: 2rem; margin-top: 0;">결과 그래프</h3>
+		</div>
+	</center>
+	<a href='./시작페이지.html' id='restart'><i class='xi-redo' id="restarticon"></i><br>다시하기</a>
+	<div id="chartdiv" style="position: fixed; top: 11rem; width: 80rem; height: 35rem; left:7rem;"></div>
+	<script>
+		am4core.ready(function () {
+
+			// Themes begin
+			am4core.useTheme(am4themes_dark);
+			am4core.useTheme(am4themes_animated);
+			// Themes end
+
+			var chart = am4core.create("chartdiv", am4charts.XYChart);
+			chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+			chart.fontFamily = "Nanum Gothic";
+			chart.data = [
+				{
+					country: "에코",
+					visits: localStorage.getItem("에코.png")
+				},
+				{
+					country: "트위스티드 페이트",
+					visits: localStorage.getItem("트페.png")
+				},
+				{
+					country: "퀸",
+					visits: localStorage.getItem("퀸.png")
+				},
+				{
+					country: "트위치",
+					visits: localStorage.getItem("트위치.png")
+				},
+				{
+					country: "아리",
+					visits: localStorage.getItem("아리.png")
+				},
+				{
+					country: "케인",
+					visits: localStorage.getItem("케인.png")
+				},
+				{
+					country: "유미",
+					visits: localStorage.getItem("유미.png")
+				},
+				{
+					country: "샤코",
+					visits: localStorage.getItem("샤코.png")
+				}
+			];
+
+			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+			categoryAxis.renderer.grid.template.location = 0;
+			categoryAxis.dataFields.category = "country";
+			categoryAxis.renderer.minGridDistance = 40;
+			categoryAxis.fontSize = 13;
+
+			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+			valueAxis.min = 0;
+			valueAxis.max = 3;
+			valueAxis.strictMinMax = true;
+			valueAxis.renderer.minGridDistance = 100;
+			// axis break
+			var axisBreak = valueAxis.axisBreaks.create();
+			axisBreak.startValue = 2100;
+			axisBreak.endValue = 22900;
+			axisBreak.breakSize = 0.005;
+
+			// make break expand on hover
+			var hoverState = axisBreak.states.create("hover");
+			hoverState.properties.breakSize = 1;
+			hoverState.properties.opacity = 0.1;
+			hoverState.transitionDuration = 1500;
+
+			axisBreak.defaultState.transitionDuration = 1000;
+
+			var series = chart.series.push(new am4charts.ColumnSeries());
+			series.dataFields.categoryX = "country";
+			series.dataFields.valueY = "visits";
+			series.columns.template.tooltipText = "클릭 수: {valueY.value}";
+			series.columns.template.tooltipY = 0;
+			series.columns.template.strokeOpacity = 0;
+
+			// as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+			series.columns.template.adapter.add("fill", function (fill, target) {
+				return chart.colors.getIndex(target.dataItem.index);
+			});
+
+		}); // end am4core.ready()
+	</script>
+
+</body>
+
+</html>

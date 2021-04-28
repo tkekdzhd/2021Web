@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<title>이상형월드컵</title>
+	<style>
+		body {
+			background-color: rgb(15, 27, 38);
+		}
+
+		.container {
+			margin: 0;
+			display: flex;
+			align-items: center;
+		}
+
+		#header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 7rem;
+			border-top: 5px solid rgb(205, 190, 145);
+			border-bottom: .5px solid rgb(59, 59, 59);
+		}
+
+		#leftImg,
+		#rightImg {
+			width: 37rem;
+			height: 24rem;
+			position: relative;
+			top: 11rem;
+			border: .8px solid rgb(205, 190, 145);
+			cursor: pointer;
+			opacity: 0.8;
+		}
+
+		#leftImg:hover,
+		#rightImg:hover {
+			opacity: 1;
+			transition: all .5s;
+		}
+
+		#leftImg {
+			left: 5rem;
+		}
+
+		#rightImg {
+			left: 15rem;
+		}
+
+		#final_comment {
+			position: relative;
+			width: 4rem;
+			top: -13rem;
+			left: 66rem;
+		}
+
+		#h3 {
+			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Noto Sans KR', sans-serif;
+			color: rgb(205, 190, 145);
+			padding-bottom: 1rem;
+		}
+
+		#chart {
+			position: fixed;
+			width: 12rem;
+			height: 2.5rem;
+			top: 38rem;
+			border-radius: 5px;
+			background-color: rgba(6, 143, 162, .6);
+			padding-left: 5.5rem;
+			padding-top: 13px;
+			left: 30rem;
+			color: white;
+			text-decoration: none;
+			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Noto Sans KR', sans-serif;
+			font-size: 20px;
+		}
+
+		#charticon {
+			position: absolute;
+			top: .5rem;
+			padding-left: 4rem;
+		}
+
+		#restarticon {
+			position: absolute;
+			top: .5rem;
+			padding-left: 4rem;
+		}
+
+		#chart:hover {
+			background-color: rgb(10, 127, 143);
+			transition: all ease .2s 0s;
+		}
+
+		#restart {
+			position: fixed;
+			width: 12rem;
+			height: 2.5rem;
+			top: 38rem;
+			border-radius: 5px;
+			padding-left: 5.5rem;
+			background-color: rgba(9, 162, 69, .6);
+			padding-top: 13px;
+			left: 48.5rem;
+			color: white;
+			text-decoration: none;
+			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Noto Sans KR', sans-serif;
+			font-size: 20px;
+		}
+
+		#restart:hover {
+			background-color: rgb(10, 146, 64);
+			transition: all ease .2s 0s;
+		}
+	</style>
+	<script>
+		var titleText = document.getElementById("title");
+		var title;
+		var imgArray = new Array();
+		var count = 0;
+		var t = 0;
+		var t1 = 1;
+		var count1 = 0;
+		var count2 = 0;
+		count1 += 7;
+		count2 += 6;
+		imgArray[0] = "샤코.png";
+		imgArray[1] = "유미.png";
+		imgArray[2] = "케인.png";
+		imgArray[3] = "트위치.png";
+		imgArray[4] = "트페.png";
+		imgArray[5] = "아리.png";
+		imgArray[6] = "퀸.png";
+		imgArray[7] = "에코.png";
+		var arr = imgArray;
+		$(document).ready(function () {
+			loadImg();
+		});
+		function loadImg() {
+			arr.sort(function () {
+				return Math.random() - Math.random();
+			});
+			console.log(arr);
+
+
+			var left = document.getElementById("leftImg");
+			var right = document.getElementById("rightImg");
+			$(left).ready(function () {
+				// Handler for .ready() called.
+			});
+			left.src = imgArray[t];
+			// right.onload = function () {
+			// }
+			$(right).ready(function () {
+				// Handler for .ready() called.
+			});
+			right.src = imgArray[t1];
+			console.log(imgArray);
+
+			for (var i = 0; i < imgArray.length; i++) {
+				localStorage.setItem(imgArray[i], "0");
+			}
+
+		};
+
+		function leftImage() {
+			var leftImg = document.getElementById("leftImg");
+			var rightImg = document.getElementById("rightImg");
+			var stcount, num;
+
+			stcount = parseInt(localStorage.getItem(imgArray[t]));
+			num = parseInt(stcount);
+			num += 1;
+			localStorage.setItem(imgArray[t], "" + num);
+
+			imgArray.push(imgArray[t]);
+
+			t += 2;
+			t1 += 2;
+			leftImg.src = imgArray[t];
+			rightImg.src = imgArray[t1];
+			console.log(imgArray);
+
+		};
+
+		function rightImage() {
+			var leftImg = document.getElementById("leftImg");
+			var rightImg = document.getElementById("rightImg");
+			var stcount, num;
+
+			stcount = parseInt(localStorage.getItem(imgArray[t1]));
+			num = parseInt(stcount);
+			num += 1;
+			localStorage.setItem(imgArray[t1], "" + num);
+
+			imgArray.push(imgArray[t1]);
+
+			t += 2;
+			t1 += 2;
+			leftImg.src = imgArray[t];
+			rightImg.src = imgArray[t1];
+
+			console.log(imgArray);
+
+		};
+
+		function Click() {
+			console.log(count)
+			leftImg = document.getElementById("leftImg");
+			rightImg = document.getElementById("rightImg");
+			if (count < 4) {
+				leftImg.addEventListener("click", leftImage);
+				rightImg.addEventListener("click", rightImage);
+				count++;
+			}
+			else if (4 <= count && count < 6) {
+				leftImg.addEventListener("click", leftImage);
+				rightImg.addEventListener("click", rightImage);
+				var h3 = document.getElementById('h3');
+				h3.innerHTML = "<span>4</span>강";
+				count++;
+			}
+			else if (count == 6) {
+				leftImg.addEventListener("click", leftImage);
+				rightImg.addEventListener("click", rightImage);
+				var h3 = document.getElementById('h3');
+				h3.innerHTML = "<span>결승</span>";
+				count++;
+			}
+			else if (count == 7) {
+				var h3 = document.getElementById('h3');
+				h3.innerHTML = "<span>최종 우승자</span>";
+
+				var left = document.getElementById('left');
+				left.innerHTML = "<img src='' id='leftImg' value='' onclick='Click()' style='position:relative; left:29rem;'>";
+
+				var right = document.getElementById('right');
+				right.innerHTML = "";
+
+				var vs = document.getElementById('vs');
+				vs.innerHTML = "<img src='./crown.png' alt='' style='position:fixed; width: 6rem; transform: rotate(-42deg); top: 8.5rem; left: 26.5rem;'>";
+
+				var final_comment1 = document.getElementById("final_comment1");
+				final_comment1.innerHTML = "<a href='./그래프페이지.html' id='chart'><i class='xi-chart-bar'></i>결과 그래프</a>";
+
+				var final_comment2 = document.getElementById("final_comment2");
+				final_comment2.innerHTML = "<a href='./시작페이지.html' id='restart'><i class='xi-redo'></i>다시하기</a>";
+			}
+		};
+	</script>
+</head>
+
+<body>
+	<center>
+		<div id="header">
+			<img src="./그림1.png" alt="" style="width:4rem">
+			<h3 id="h3" style="font-size: 2rem; margin-top: 0;"><span><strong>8</strong></span>강</h3>
+		</div>
+	</center>
+	<div class="container">
+		<div id="left"><img src="" id="leftImg" value="" onclick="Click()"></div>
+		<div id="vs"><img src="./그림2.png" alt="" style="width: 10rem; position: fixed; top: 22rem; left: 44.5rem;">
+		</div>
+		<div id="right"><img src="" id="rightImg" value="" onclick="Click()"></div>
+	</div>
+	<div id="final_comment1"></div>
+	<div id="final_comment2"></div>
+</body>
+
+</html>
